@@ -104,10 +104,10 @@ router.get('/post/:id', (req, res) => {
 
 // redirecting users to see all their posts with comments
 router.get('/posts-comments', (req, res) => {
-    Post.findOne({
-        where: {
-          id: req.params.id
-        },
+    Post.findAll({
+        // where: {
+        //   id: req.params.id
+        // },
         attributes: [
           'id',
           'content',
@@ -130,10 +130,10 @@ router.get('/posts-comments', (req, res) => {
         ]
       })
         .then(dbPostData => {
-          if (!dbPostData) {
-            res.status(404).json({ message: 'No post found with this id' });
-            return;
-          }
+          // if (!dbPostData) {
+          //   res.status(404).json({ message: 'No post found with this id' });
+          //   return;
+          // }
     
           // serialize the data
           const post = dbPostData.get({ plain: true });
