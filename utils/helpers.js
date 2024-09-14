@@ -1,6 +1,13 @@
+// utils/helpers.js
 module.exports = {
-  format_date: date => {
-      return `${new Date(date).getDate()}/${new Date(date).getMonth() + 1}/${new Date(date).getFullYear()}`;
-    },
-
-}
+  format_date: (date) => {
+    if (!date) return '';
+    return new Date(date).toLocaleDateString('en-GB'); // Formats to DD/MM/YYYY
+  },
+  
+  // Optional: Add more helpers as needed
+  capitalize: (str) => {
+    if (typeof str !== 'string') return '';
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  },
+};
