@@ -29,7 +29,7 @@ Post.init(
         }
       }
     },
-    {
+    
       sequelize,
       timestamps: true,
       createdAt: 'created_at',

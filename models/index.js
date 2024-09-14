@@ -1,29 +1,39 @@
-// seeds/index.js or seeds/seed.js
-const seedUsers = require('./user');
-const seedPosts = require('./post');
-const seedComments = require('./comment');
+// models/index.js
+const User = require('./User');
+const Post = require('./Post');
+const Comment = require('./Comment');
 
-const sequelize = require('../config/connection');
+// Associations
 
-const seedAll = async () => {
-    try {
-        await sequelize.sync({ force: true });
-        console.log('Database synced successfully.');
+// User-Post: One-to-Many
+User.hasMany(Post, {
+  foreignKey: 'user_id',
+  onDelete: 'CASCADE',
+});
 
-        await seedUsers();
-        console.log('Users seeded successfully.');
+Post.belongsTo(User, {
+  foreignKey: 'user_id',
+});
 
-        await seedPosts();
-        console.log('Posts seeded successfully.');
+// User-Comment: One-to-Many
+User.hasMany(Comment, {
+  foreignKey: 'user_id',
+  onDelete: 'CASCADE',
+});
 
-        await seedComments();
-        console.log('Comments seeded successfully.');
+Comment.belongsTo(User, {
+  foreignKey: 'user_id',
+});
 
-        process.exit(0);
-    } catch (error) {
-        console.error('Failed to seed database:', error);
-        process.exit(1);
-    }
-};
+// Post-Comment: One-to-Many
+Post.hasMany(Comment, {
+  foreignKey: 'post_id',
+  onDelete: 'CASCADE',
+});
 
-seedAll();
+Comment.belongsTo(Post, {
+  foreignKey: 'post_id',
+});
+
+module.exports = { User, Post, Comment };
+
