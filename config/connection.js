@@ -10,9 +10,7 @@ const sequelize = new Sequelize(
     host: process.env.DB_HOST,
     dialect: 'postgres',
     port: process.env.DB_PORT,
-    dialectOptions: {
-      // Additional options if needed
-    },
+    logging: false, // Disable logging; default: console.log
   }
 );
 
