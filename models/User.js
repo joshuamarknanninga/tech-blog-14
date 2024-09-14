@@ -12,13 +12,16 @@ User.init(
   {
     id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      // allowNull: false,
       primaryKey: true,
       autoIncrement: true,
     },
     username: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
+      validate: {
+        len: [4, 20],
     },
     email: {
         type: DataTypes.STRING,
