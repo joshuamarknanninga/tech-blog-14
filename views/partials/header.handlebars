@@ -1,18 +1,16 @@
 <!-- views/partials/header.handlebars -->
-<header>
-  <div class="nav-container">
-    <h1><a href="/">The Tech Blog</a></h1>
-    <nav>
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/dashboard">Dashboard</a></li>
-        {{#if logged_in}}
-        <li><a href="#" id="logout">Logout</a></li>
-        {{else}}
-        <li><a href="/login">Login</a></li>
-        <li><a href="/signup">Sign Up</a></li>
-        {{/if}}
-      </ul>
-    </nav>
-  </div>
+<header class="row">
+  <h1><a class="logo" href="/">The Tech Word</a></h1>
+  <nav>
+    <ul class="navbar">
+      <li><a class="link" href="/">Home</a></li>
+      {{#if loggedIn}}
+        <li><a class="link" href="/dashboard">Dashboard</a></li>
+        <li><a class="link" href="#" id="logout">Logout</a></li>
+      {{else}}
+        <li><a class="link" href="/login">Login</a></li>
+        <li><a class="link" href="/signup">Sign Up</a></li>
+      {{/if}}
+    </ul>
+  </nav>
 </header>
