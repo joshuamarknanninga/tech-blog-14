@@ -27,6 +27,7 @@ const sess = {
 };
 
 app.use(session(sess));
+app.use(flash());
 
 // Handlebars setup
 const hbs = exphbs.create({ helpers });
