@@ -1,26 +1,21 @@
-async function deleteFormHandler(event) {
+// public/js/delete-post.js
+document.querySelector('.delete-post-btn').addEventListener('click', async (event) => {
   event.preventDefault();
 
-  const id = window.location.toString().split('/')[
-      window.location.toString().split('/').length - 1
-    ];
-    
-    const response = await fetch(`/api/posts/${id}`, {
-      method: 'DELETE',
-      body: JSON.stringify({
-        post_id: id
-      }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
-    
-    if (response.ok) {
-      document.location.replace('/dashboard/');
-    } else {
-      alert(response.statusText);
-    }
-    
-}
+  const postId = window.location.pathname.split('/').pop();
 
-document.querySelector('.delete-post-btn').addEventListener('click', deleteFormHandler);
+  const confirmDelete = confirm('Are you sure you want to delete this post?');
+  if (!confirmDelete) return;
+
+  const response = await fetch(`/api/posts/${postId}`, {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' },
+  });
+
+  if (response.ok) {
+    alert('Post deleted successfully!');
+    document.location.replace('/dashboard');
+  } else {
+    alert('Failed to delete post.');
+  }
+});

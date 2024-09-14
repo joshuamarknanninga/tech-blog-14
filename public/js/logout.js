@@ -1,14 +1,16 @@
-async function logout() {
+// public/js/logout.js
+document.getElementById('logout').addEventListener('click', async (event) => {
+  event.preventDefault();
+
   const response = await fetch('/api/users/logout', {
-    method: 'post',
-    headers: { 'Content-Type': 'application/json' }
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
   });
 
-  if (response.ok) {
+  if (response.status === 204) {
+    alert('You have been logged out.');
     document.location.replace('/');
   } else {
-    alert(response.statusText);
+    alert('Failed to log out.');
   }
-}
-
-document.querySelector('#logout').addEventListener('click', logout);
+});

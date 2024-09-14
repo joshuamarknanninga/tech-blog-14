@@ -1,28 +1,22 @@
-//  login submission 
-
-async function loginFormHandler(event) {
+// public/js/login.js
+document.getElementById('login-form').addEventListener('submit', async (event) => {
   event.preventDefault();
 
-  const username = document.querySelector('#username-login').value.trim();
-  const password = document.querySelector('#password-login').value.trim();
+  const username = document.getElementById('username-login').value.trim();
+  const password = document.getElementById('password-login').value.trim();
 
-  if (username && password) {
-    const response = await fetch('/api/users/login', {
-      method: 'post',
-      body: JSON.stringify({
-        username,
-        password
-      }),
-      headers: { 'Content-Type': 'application/json' }
-    });
+  const response = await fetch('/api/users/login', {
+    method: 'POST',
+    body: JSON.stringify({ username, password }),
+    headers: { 'Content-Type': 'application/json' },
+  });
 
-    if (response.ok) {
-      document.location.replace('/dashboard');
-    } else {
-      alert(response.statusText);
-    }
+  const data = await response.json();
+
+  if (response.ok) {
+    alert(data.message); // Display success message
+    document.location.replace('/dashboard');
+  } else {
+    alert(data.message || 'Failed to log in.');
   }
-}
-
-
-document.querySelector('#login-form').addEventListener('submit', loginFormHandler);
+});

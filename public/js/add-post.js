@@ -1,25 +1,22 @@
-async function newFormHandler(event) {
+// public/js/add-post.js
+document.getElementById('new-post-form').addEventListener('submit', async (event) => {
   event.preventDefault();
 
-  const title = document.querySelector('input[name="post-title"]').value;
-  const content = document.querySelector('input[name="content"]').value;
+  const title = document.getElementById('post-title').value.trim();
+  const content = document.getElementById('content').value.trim();
 
-  const response = await fetch(`/api/posts`, {
+  const response = await fetch('/api/posts', {
     method: 'POST',
-    body: JSON.stringify({
-      title,
-      content
-    }),
-    headers: {
-      'Content-Type': 'application/json'
-    }
+    body: JSON.stringify({ title, content }),
+    headers: { 'Content-Type': 'application/json' },
   });
 
+  const data = await response.json();
+
   if (response.ok) {
+    alert('Post created successfully!');
     document.location.replace('/dashboard');
   } else {
-    alert(response.statusText);
+    alert(data.message || 'Failed to create post.');
   }
-};
-
-document.querySelector('#new-post-form').addEventListener('submit', newFormHandler);
+});
