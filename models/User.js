@@ -22,6 +22,7 @@ User.init(
       unique: true,
       validate: {
         len: [4, 20],
+      }
     },
     email: {
         type: DataTypes.STRING,
