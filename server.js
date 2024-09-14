@@ -2,6 +2,7 @@
 const path = require('path');
 const express = require('express');
 const session = require('express-session');
+const flash = require('connect-flash');
 const exphbs = require('express-handlebars');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
@@ -40,6 +41,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
 app.use(routes);
+
+// Global variables for flash messages and user info
+app.use((req, res, next) => {
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  res.locals.error = req.flash('error');
+  res.locals.loggedIn = req.session.loggedIn;
+  res.locals.username = req.session.username;
+  next();
+});
+
 
 // Start server after Sequelize connection
 sequelize.sync({ force: false }).then(() => {

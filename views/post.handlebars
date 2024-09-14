@@ -1,22 +1,22 @@
-
+<!-- views/post.handlebars -->
 {{> post-info post}}
 
 {{#if loggedIn}}
-<div class="card">
-    <h3 class="card-header"></h3>
+  <div class="card">
+    <h3 class="card-header">Add a Comment</h3>
     <form class="card-body comment-form" id="comment-form">
-
-        <label class="form-label">Comment</label>
-        <input id="comment" name="comment-body" class="form-input" />
-
-        <button type="submit" class="btn">Submit</button>
+      <label class="form-label" for="comment">Comment</label>
+      <textarea id="comment" name="comment_text" class="form-input form-control" required></textarea>
+      <button type="submit" class="btn btn-primary">Submit</button>
+      <div id="error-message" class="error"></div>
     </form>
-</div>
+  </div>
+{{else}}
+  <p><a href="/login">Log in</a> to add a comment.</p>
 {{/if}}
-
 
 {{> comments post.comments}}
 
 {{#if loggedIn}}
-<script src="/javascript/comment.js"></script>
+  <script src="/js/comment.js"></script>
 {{/if}}

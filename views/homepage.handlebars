@@ -1,5 +1,11 @@
-{{#each posts as |post| }}
-<article class="post">
-    {{> post-info post}}
-</article>
-{{/each}}
+<!-- views/home.handlebars -->
+<h1>Welcome to The Tech Word</h1>
+{{#if posts.length}}
+  {{#each posts as |post|}}
+    <article class="post">
+      {{> post-info post}}
+    </article>
+  {{/each}}
+{{else}}
+  <p>No posts have been published yet. Check back soon!</p>
+{{/if}}

@@ -1,16 +1,16 @@
+<!-- views/dashboard.handlebars -->
 <h2>Your Posts</h2>
 
-<button type="submit" class="btn new-post-button"><a class="link" href="/dashboard/new">+ New Post</a></button>
-<section>
-{{#if posts.length}}
+<button type="button" class="btn btn-success new-post-button"><a class="link" href="/dashboard/new" style="color: white;">+ New Post</a></button>
 
-  
+<section>
+  {{#if posts.length}}
     {{#each posts as |post|}}
       {{> dashboard-postinfo post}}
     {{/each}}
-
-
-{{/if}}
+  {{else}}
+    <p>You haven't created any posts yet. Click "New Post" to get started!</p>
+  {{/if}}
 </section>
 
 <script src="/js/add-post.js"></script>
