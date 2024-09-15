@@ -15,7 +15,7 @@ Comment.init(
       type: DataTypes.TEXT,
       allowNull: false,
       validate: {
-        len: [1],
+        len: [1, 500], // Ensure the comment length is between 1 and 500 characters
       },
     },
     user_id: {
@@ -37,7 +37,7 @@ Comment.init(
     sequelize,
     timestamps: true,
     createdAt: 'created_at',
-    updatedAt: false,
+    updatedAt: 'updated_at', // Changed to track updates to comments
     freezeTableName: true,
     underscored: true,
     modelName: 'comment',
