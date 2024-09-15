@@ -2,10 +2,10 @@
 const Sequelize = require('sequelize');
 require('dotenv').config();
 
-const sequelize = new Sequelize('tech_blog_db', 'joshuamarknanninga', '2004hondaodysey!', {
-  host: process.env.DB_HOST,
+const sequelize = new Sequelize('tech_blog_db', null, null, {
+  host: 'localhost',
   dialect: 'postgres',
-  port: process.env.DB_PORT,
+  port: 5432,
   logging: false, // Disable logging; set to true for debugging
 
 });
