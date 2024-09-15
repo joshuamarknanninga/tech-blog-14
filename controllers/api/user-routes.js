@@ -5,10 +5,16 @@ const { User } = require('../../models');
 // Register a new user
 router.post('/signup', async (req, res) => {
   try {
+    // Input validation
+    if (!req.body.username || !req.body.email || !req.body.password) {
+      res.status(400).json({ message: 'Username, email, and password are required.' });
+      return;
+    }
+
     const userData = await User.create({
       username: req.body.username,
       email: req.body.email, // Ensure email is included
-      password: req.body.password
+      password: req.body.password,
     });
 
     // Save user data in session
@@ -31,6 +37,12 @@ router.post('/signup', async (req, res) => {
 // Login route
 router.post('/login', async (req, res) => {
   try {
+    // Input validation
+    if (!req.body.username || !req.body.password) {
+      res.status(400).json({ message: 'Username and password are required.' });
+      return;
+    }
+
     const userData = await User.findOne({ where: { username: req.body.username } });
 
     if (!userData) {
