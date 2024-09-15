@@ -6,6 +6,7 @@
   "scripts": {
     "test": "jest",
     "start": "node server.js",
+    "migrate": "sequelize db:migrate",
     "watch": "nodemon server.js",
     "seed": "node seeds/seeds.js",
     "dev": "nodemon server.js"
